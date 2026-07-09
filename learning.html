@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learning Dashboard — Renu Karule</title>
+<meta name="description" content="A dated log of things Renu Karule has experimented with using Claude Code.">
+<style>
+  :root {
+    --bg: #f4f5f2;
+    --surface: #ffffff;
+    --ink: #14171a;
+    --ink-soft: #565b63;
+    --ink-faint: #8a9098;
+    --accent: #b45309;
+    --accent-ink: #7c3908;
+    --accent-soft: #fdecd8;
+    --rule: #dfe1dc;
+    --chip-bg: #eceee9;
+    --chip-border: #d5d8d1;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14171a;
+      --surface: #1b1f23;
+      --ink: #eef0ee;
+      --ink-soft: #9aa1a6;
+      --ink-faint: #6d7278;
+      --accent: #f0a856;
+      --accent-ink: #ffd9ab;
+      --accent-soft: #2a2018;
+      --rule: #2b2f33;
+      --chip-bg: #202427;
+      --chip-border: #33383c;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14171a;
+    --surface: #1b1f23;
+    --ink: #eef0ee;
+    --ink-soft: #9aa1a6;
+    --ink-faint: #6d7278;
+    --accent: #f0a856;
+    --accent-ink: #ffd9ab;
+    --accent-soft: #2a2018;
+    --rule: #2b2f33;
+    --chip-bg: #202427;
+    --chip-border: #33383c;
+  }
+  :root[data-theme="light"] {
+    --bg: #f4f5f2;
+    --surface: #ffffff;
+    --ink: #14171a;
+    --ink-soft: #565b63;
+    --ink-faint: #8a9098;
+    --accent: #b45309;
+    --accent-ink: #7c3908;
+    --accent-soft: #fdecd8;
+    --rule: #dfe1dc;
+    --chip-bg: #eceee9;
+    --chip-border: #d5d8d1;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .sitenav { border-bottom: 1px solid var(--rule); }
+  .sitenav-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 20px 28px;
+    display: flex;
+    gap: 24px;
+    font-family: ui-monospace, "Cascadia Code", Consolas, "SFMono-Regular", monospace;
+    font-size: 13px;
+  }
+  .sitenav a { color: var(--ink-soft); text-decoration: none; letter-spacing: 0.02em; }
+  .sitenav a:hover { color: var(--ink); }
+  .sitenav a.active { color: var(--accent-ink); font-weight: 700; }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 64px 28px 120px;
+  }
+
+  .eyebrow {
+    font-family: ui-monospace, "Cascadia Code", Consolas, "SFMono-Regular", monospace;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: var(--accent-ink);
+    margin: 0 0 18px;
+  }
+
+  h1 {
+    font-family: Georgia, "Iowan Old Style", "Times New Roman", serif;
+    font-weight: 600;
+    font-size: 38px;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 0 0 10px;
+    text-wrap: balance;
+  }
+
+  .dek {
+    font-size: 17px;
+    color: var(--ink-soft);
+    max-width: 58ch;
+    margin: 0 0 8px;
+  }
+
+  .day {
+    margin-top: 52px;
+    padding-top: 40px;
+    border-top: 1px solid var(--rule);
+  }
+  .day:first-of-type { margin-top: 56px; }
+
+  .day-date {
+    font-family: ui-monospace, "Cascadia Code", Consolas, "SFMono-Regular", monospace;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin: 0 0 18px;
+  }
+
+  .entries {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .entry {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 12px;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .entry-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 6px;
+  }
+  .entry h3 {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 4px;
+  }
+  .entry p {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin: 0;
+    max-width: 56ch;
+  }
+  .entry ul {
+    margin: 0;
+    padding-left: 16px;
+    max-width: 56ch;
+  }
+  .entry li {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin: 0 0 4px;
+  }
+  .entry li:last-child { margin-bottom: 0; }
+  .entry .tag {
+    display: inline-block;
+    font-family: ui-monospace, "Cascadia Code", Consolas, "SFMono-Regular", monospace;
+    font-size: 11px;
+    color: var(--accent-ink);
+    background: var(--accent-soft);
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    letter-spacing: 0.03em;
+  }
+
+  footer {
+    margin-top: 72px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    font-size: 13px;
+    color: var(--ink-faint);
+  }
+
+  @media (max-width: 560px) {
+    .wrap { padding: 48px 20px 90px; }
+    h1 { font-size: 30px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="sitenav">
+  <div class="sitenav-inner">
+    <a href="index.html">Home</a>
+    <a href="learning.html" class="active">Learning Dashboard</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">// hands-on with claude code</p>
+    <h1>Learning Dashboard</h1>
+    <p class="dek">A running, dated log of things I've experimented with while working with Claude Code — tools, deployments, and small builds.</p>
+  </header>
+
+  <div class="day">
+    <p class="day-date">July 7, 2026</p>
+    <div class="entries">
+      <div class="entry">
+        <div class="entry-dot"></div>
+        <div>
+          <span class="tag">Claude</span>
+          <h3>Compared Claude model variants</h3>
+          <ul>
+            <li>Opus, Sonnet, Haiku, Fable — capability vs. speed vs. cost</li>
+            <li>Picked Sonnet for day-to-day coding work</li>
+          </ul>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="entry-dot"></div>
+        <div>
+          <span class="tag">Docs</span>
+          <h3>Wrote an LLM overview reference doc</h3>
+          <ul>
+            <li>Tokenization, transformer architecture, training, inference</li>
+            <li>Delivered as a styled page, then plain Markdown</li>
+          </ul>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="entry-dot"></div>
+        <div>
+          <span class="tag">Skills</span>
+          <h3>Built a custom Claude Code skill</h3>
+          <ul>
+            <li>daily-history-log: appends dated session summaries to a log file</li>
+          </ul>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="entry-dot"></div>
+        <div>
+          <span class="tag">Automation</span>
+          <h3>Explored scheduling options</h3>
+          <ul>
+            <li>Cloud routines can't reach local files</li>
+            <li>Chose Windows Task Scheduler for a daily local trigger</li>
+          </ul>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="entry-dot"></div>
+        <div>
+          <span class="tag">GitHub</span>
+          <h3>Connected GitHub and set up the CLI</h3>
+          <ul>
+            <li>Connected the GitHub connector on claude.ai</li>
+            <li>Installed and authenticated the GitHub CLI locally</li>
+          </ul>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="entry-dot"></div>
+        <div>
+          <span class="tag">Git</span>
+          <h3>Pushed a first project to GitHub</h3>
+          <ul>
+            <li>Initialized a local repo and pushed it as a new private GitHub repository</li>
+          </ul>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="entry-dot"></div>
+        <div>
+          <span class="tag">Debugging</span>
+          <h3>Diagnosed a GitHub connector 403 error</h3>
+          <ul>
+            <li>claude.ai's GitHub connector is read-only by design</li>
+            <li>Writes need Claude Code or a GitHub MCP server instead</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="day">
+    <p class="day-date">July 8, 2026</p>
+    <div class="entries">
+      <div class="entry">
+        <div class="entry-dot"></div>
+        <div>
+          <span class="tag">Setup</span>
+          <h3>Installed Git and configured identity</h3>
+          <ul>
+            <li>Installed Git for Windows via winget</li>
+            <li>Set global user.name / user.email for commits</li>
+          </ul>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="entry-dot"></div>
+        <div>
+          <span class="tag">Build</span>
+          <h3>Built a practice trading-app UI</h3>
+          <ul>
+            <li>Robinhood-inspired static landing page for UI practice</li>
+            <li>Extended into a no-login paper-trading demo: buy/sell, live price ticks, localStorage</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="day">
+    <p class="day-date">July 9, 2026</p>
+    <div class="entries">
+      <div class="entry">
+        <div class="entry-dot"></div>
+        <div>
+          <span class="tag">Build</span>
+          <h3>Designed and built this portfolio site</h3>
+          <ul>
+            <li>Personal intro site built from scratch</li>
+            <li>Palette and typography chosen for an ML/NLP profile</li>
+          </ul>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="entry-dot"></div>
+        <div>
+          <span class="tag">Deploy</span>
+          <h3>Deployed to the internet</h3>
+          <ul>
+            <li>Pushed site to a new GitHub repo</li>
+            <li>Deployed live via Netlify CLI to renu-karule-portfolio.netlify.app</li>
+          </ul>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="entry-dot"></div>
+        <div>
+          <span class="tag">CI/CD</span>
+          <h3>Wired up continuous deployment</h3>
+          <ul>
+            <li>Linked GitHub repo to Netlify</li>
+            <li>Every push to master now auto-deploys — verified via the Netlify API</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2026 Renu Karule.
+  </footer>
+
+</div>
+
+</body>
+</html>

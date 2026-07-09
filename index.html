@@ -220,6 +220,26 @@
     color: var(--ink-faint);
   }
 
+  .sitenav {
+    border-bottom: 1px solid var(--rule);
+  }
+  .sitenav-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 20px 28px;
+    display: flex;
+    gap: 24px;
+    font-family: ui-monospace, "Cascadia Code", Consolas, "SFMono-Regular", monospace;
+    font-size: 13px;
+  }
+  .sitenav a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .sitenav a:hover { color: var(--ink); }
+  .sitenav a.active { color: var(--accent-ink); font-weight: 700; }
+
   @media (max-width: 560px) {
     .wrap { padding: 56px 22px 90px; }
     h1 { font-size: 34px; }
@@ -229,6 +249,13 @@
 </style>
 </head>
 <body>
+
+<nav class="sitenav">
+  <div class="sitenav-inner">
+    <a href="index.html" class="active">Home</a>
+    <a href="learning.html">Learning Dashboard</a>
+  </div>
+</nav>
 
 <div class="wrap">
 
