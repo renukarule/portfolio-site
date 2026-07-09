@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Renu Karule — Machine Learning Engineer</title>
+<meta name="description" content="Renu Karule, Machine Learning Engineer specializing in NLP, Python, Java, and cloud-scale ML systems.">
+<style>
+  :root {
+    --bg: #f4f5f2;
+    --surface: #ffffff;
+    --ink: #14171a;
+    --ink-soft: #565b63;
+    --ink-faint: #8a9098;
+    --accent: #b45309;
+    --accent-ink: #7c3908;
+    --accent-soft: #fdecd8;
+    --rule: #dfe1dc;
+    --chip-bg: #eceee9;
+    --chip-border: #d5d8d1;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14171a;
+      --surface: #1b1f23;
+      --ink: #eef0ee;
+      --ink-soft: #9aa1a6;
+      --ink-faint: #6d7278;
+      --accent: #f0a856;
+      --accent-ink: #ffd9ab;
+      --accent-soft: #2a2018;
+      --rule: #2b2f33;
+      --chip-bg: #202427;
+      --chip-border: #33383c;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14171a;
+    --surface: #1b1f23;
+    --ink: #eef0ee;
+    --ink-soft: #9aa1a6;
+    --ink-faint: #6d7278;
+    --accent: #f0a856;
+    --accent-ink: #ffd9ab;
+    --accent-soft: #2a2018;
+    --rule: #2b2f33;
+    --chip-bg: #202427;
+    --chip-border: #33383c;
+  }
+  :root[data-theme="light"] {
+    --bg: #f4f5f2;
+    --surface: #ffffff;
+    --ink: #14171a;
+    --ink-soft: #565b63;
+    --ink-faint: #8a9098;
+    --accent: #b45309;
+    --accent-ink: #7c3908;
+    --accent-soft: #fdecd8;
+    --rule: #dfe1dc;
+    --chip-bg: #eceee9;
+    --chip-border: #d5d8d1;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 88px 28px 120px;
+  }
+
+  .eyebrow {
+    font-family: ui-monospace, "Cascadia Code", Consolas, "SFMono-Regular", monospace;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: var(--accent-ink);
+    margin: 0 0 18px;
+  }
+
+  h1 {
+    font-family: Georgia, "Iowan Old Style", "Times New Roman", serif;
+    font-weight: 600;
+    font-size: 46px;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin: 0 0 10px;
+    text-wrap: balance;
+  }
+
+  .role {
+    font-size: 19px;
+    color: var(--ink-soft);
+    margin: 0 0 30px;
+  }
+
+  .bio {
+    font-size: 17px;
+    max-width: 62ch;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  section {
+    margin-top: 56px;
+    padding-top: 48px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .section-label {
+    font-family: ui-monospace, "Cascadia Code", Consolas, "SFMono-Regular", monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 20px;
+  }
+
+  .skill-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    margin-bottom: 4px;
+  }
+  .skill-cat {
+    min-width: 200px;
+  }
+  .skill-cat h3 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink-soft);
+    margin: 0 0 10px;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chip {
+    font-family: ui-monospace, "Cascadia Code", Consolas, "SFMono-Regular", monospace;
+    font-size: 13px;
+    background: var(--chip-bg);
+    border: 1px solid var(--chip-border);
+    color: var(--ink);
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+
+  .project {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 26px 28px;
+  }
+  .project h3 {
+    font-family: Georgia, "Iowan Old Style", "Times New Roman", serif;
+    font-size: 21px;
+    font-weight: 600;
+    margin: 0 0 10px;
+  }
+  .project p {
+    font-size: 15px;
+    color: var(--ink-soft);
+    margin: 0 0 16px;
+    max-width: 58ch;
+  }
+  .project a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent-ink);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  .project a:hover { border-bottom-color: var(--accent-ink); }
+
+  .contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .contact-row {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    font-size: 16px;
+  }
+  .contact-row .label {
+    font-family: ui-monospace, "Cascadia Code", Consolas, "SFMono-Regular", monospace;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink-faint);
+    width: 64px;
+    flex-shrink: 0;
+  }
+  .contact-row a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+  }
+  .contact-row a:hover { border-bottom-color: var(--accent); color: var(--accent-ink); }
+
+  footer {
+    margin-top: 72px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    font-size: 13px;
+    color: var(--ink-faint);
+  }
+
+  @media (max-width: 560px) {
+    .wrap { padding: 56px 22px 90px; }
+    h1 { font-size: 34px; }
+    .contact-row { flex-direction: column; gap: 2px; }
+    .contact-row .label { width: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">// machine learning · nlp · applied ai</p>
+    <h1>Renu Karule</h1>
+    <p class="role">Machine Learning Engineer</p>
+    <p class="bio">I build machine learning systems with a focus on natural language processing — from data pipelines and model training to deploying and scaling them in production across cloud and enterprise platforms.</p>
+  </header>
+
+  <section>
+    <p class="section-label">Skills</p>
+    <div class="skill-group">
+      <div class="skill-cat">
+        <h3>Languages</h3>
+        <div class="chips">
+          <span class="chip">Python</span>
+          <span class="chip">Java</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h3>ML / AI</h3>
+        <div class="chips">
+          <span class="chip">Machine Learning</span>
+          <span class="chip">Artificial Intelligence</span>
+          <span class="chip">NLP</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h3>Platforms</h3>
+        <div class="chips">
+          <span class="chip">Node.js</span>
+          <span class="chip">AWS</span>
+          <span class="chip">Salesforce Cloud</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Featured Project</p>
+    <div class="project">
+      <h3>Text Classification with Logistic Regression (NLP)</h3>
+      <p>Built a Twitter dataset for a text classification task, using Logistic Regression to classify tweets into four categories: Sport, Movie, Religion, and Technology.</p>
+      <a href="https://github.com/renukarule/Text-classification-using-Logistic-Regression-NLP-" target="_blank" rel="noopener">View on GitHub &rarr;</a>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Contact</p>
+    <div class="contact-list">
+      <div class="contact-row">
+        <span class="label">EMAIL</span>
+        <a href="mailto:rakarule@gmail.com">rakarule@gmail.com</a>
+      </div>
+      <div class="contact-row">
+        <span class="label">GITHUB</span>
+        <a href="https://github.com/renukarule" target="_blank" rel="noopener">github.com/renukarule</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2026 Renu Karule.
+  </footer>
+
+</div>
+
+</body>
+</html>
